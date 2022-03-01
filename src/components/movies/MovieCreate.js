@@ -1,5 +1,7 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import { createMovie } from "../../actions";
 
 class MovieCreate extends React.Component {
   renderError({ error, touched }) {
@@ -23,7 +25,9 @@ class MovieCreate extends React.Component {
     );
   };
 
-  onSubmit(formProps) {}
+  onSubmit = (formValues) => {
+    this.props.createMovie(formValues);
+  };
 
   render() {
     return (
@@ -57,7 +61,9 @@ const validate = (formValues) => {
   return errors;
 };
 
-export default reduxForm({
+const formWrapped = reduxForm({
   form: "movieCreate",
   validate,
 })(MovieCreate);
+
+export default connect(null, { createMovie })(formWrapped);
