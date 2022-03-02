@@ -12,7 +12,9 @@ class MovieList extends React.Component {
     if (movie.userId === this.props.currentUserId) {
       return (
         <div className="right floated content">
-          <button className="ui button primary">Edit</button>
+          <Link to={`/movies/edit/${movie.id}`} className="ui button primary">
+            Edit
+          </Link>
           <button className="ui button negative">Delete</button>
         </div>
       );

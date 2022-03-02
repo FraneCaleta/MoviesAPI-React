@@ -16,7 +16,7 @@ const App = () => {
           <Header />
           <Route path="/" exact component={MovieList} />
           <Route path="/movies/new" exact component={MovieCreate} />
-          <Route path="/movies/edit" exact component={MovieEdit} />
+          <Route path="/movies/edit/:id" exact component={MovieEdit} />
           <Route path="/movies/delete" exact component={MovieDelete} />
           <Route path="/movies/show" exact component={MovieShow} />
         </div>
