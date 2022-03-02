@@ -22,4 +22,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps)(MovieEdit);
+export default connect(mapStateToProps, { fetchMovie })(MovieEdit);
