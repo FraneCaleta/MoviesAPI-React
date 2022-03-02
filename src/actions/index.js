@@ -1,4 +1,5 @@
 import movies from "../apis/movies";
+import history from "../history";
 import {
   CREATE_MOVIE,
   FETCH_MOVIES,
@@ -22,10 +23,12 @@ export const signOut = () => {
   };
 };
 
-export const createMovie = (formValues) => async (dispatch) => {
-  const response = await movies.post("/movies", formValues);
+export const createMovie = (formValues) => async (dispatch, getState) => {
+  const { userId } = getState().auth;
+  const response = await movies.post("/movies", { ...formValues, userId });
 
   dispatch({ type: CREATE_MOVIE, payload: response.data });
+  history.push("/");
 };
 
 export const fetchMovies = () => async (dispatch) => {
