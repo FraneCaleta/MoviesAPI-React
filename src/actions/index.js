@@ -44,9 +44,10 @@ export const fetchMovie = (id) => async (dispatch) => {
 };
 
 export const editMovie = (id, formValues) => async (dispatch) => {
-  const response = await movies.put(`/movies/${id}`, formValues);
+  const response = await movies.patch(`/movies/${id}`, formValues);
 
   dispatch({ type: EDIT_MOVIE, payload: response.data });
+  history.push("/");
 };
 
 export const deleteMovie = (id) => async (dispatch) => {
