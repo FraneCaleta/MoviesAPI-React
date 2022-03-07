@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 import { connect } from "react-redux";
-import { formValues } from "redux-form";
 import { fetchMovie, editMovie } from "../../actions";
 import MovieForm from "./MovieForm";
 
