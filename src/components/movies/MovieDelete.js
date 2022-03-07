@@ -1,24 +1,61 @@
 import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import Modal from "../Modal";
+import history from "../../history";
+import { fetchMovie, deleteMovie } from "../../actions";
 
-const MovieDelete = () => {
-  const actions = (
-    <React.Fragment>
-      <button className="ui button negative">Delete</button>
-      <button className="ui button">Cancel</button>
-    </React.Fragment>
-  );
+class MovieDelete extends React.Component {
+  componentDidMount() {
+    this.props.fetchMovie(this.props.match.params.id);
+  }
 
-  return (
-    <div>
-      Delete a movie
+  renderActions() {
+    const { id } = this.props.match.params;
+
+    return (
+      <React.Fragment>
+        <button
+          onClick={() => this.props.deleteMovie(id)}
+          className="ui button negative"
+        >
+          Delete
+        </button>
+        <Link to="/" className="ui button">
+          Cancel
+        </Link>
+      </React.Fragment>
+    );
+  }
+
+  renderContent() {
+    if (!this.props.movie) {
+      return "Are you sure you want to delete this movie?";
+    }
+    return (
+      <span>
+        Are you sure you want to delete the movie with title:{" "}
+        <strong>{this.props.movie.title}</strong>
+      </span>
+    );
+  }
+
+  render() {
+    return (
       <Modal
         title="Delete Movie"
-        content="Are you sure you want to delete this movie?"
-        actions={actions}
+        content={this.renderContent()}
+        actions={this.renderActions()}
+        onDismiss={() => history.push("/")}
       />
-    </div>
-  );
+    );
+  }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return { movie: state.movies[ownProps.match.params.id] };
 };
 
-export default MovieDelete;
+export default connect(mapStateToProps, { fetchMovie, deleteMovie })(
+  MovieDelete
+);

@@ -54,4 +54,5 @@ export const deleteMovie = (id) => async (dispatch) => {
   await movies.delete(`/movies/${id}`);
 
   dispatch({ type: DELETE_MOVIE, payload: id });
+  history.push("/");
 };

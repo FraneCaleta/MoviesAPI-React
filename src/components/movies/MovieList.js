@@ -15,7 +15,12 @@ class MovieList extends React.Component {
           <Link to={`/movies/edit/${movie.id}`} className="ui button primary">
             Edit
           </Link>
-          <button className="ui button negative">Delete</button>
+          <Link
+            to={`/movies/delete/${movie.id}`}
+            className="ui button negative"
+          >
+            Delete
+          </Link>
         </div>
       );
     }
@@ -40,7 +45,7 @@ class MovieList extends React.Component {
           {this.renderAdmin(movie)}
           <i className="large middle aligned icon play circle outline" />
           <div className="content">
-            {movie.title}
+            <strong>{movie.title}</strong>
             <div className="description">{movie.description}</div>
           </div>
         </div>
